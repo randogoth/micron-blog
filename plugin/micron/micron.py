@@ -223,7 +223,8 @@ class MicronWriter(Writer):
     
     def __init__(self, output_path, settings):
         super().__init__(output_path, settings)
-        self.output_path = settings.get('MICRON_PATH', 'micron/')
+        out = settings.get('OUTPUT_PATH', 'output/')
+        self.output_path = settings.get('MICRON_PATH', out)
 
     def write_file(self, name, template, context, relative_urls=False,
                    paginated=None, template_name=None, override_output=False,

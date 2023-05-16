@@ -1,0 +1,4 @@
+Markdown==3.4.3
+mistune==3.0.0rc5
+pelican==4.8.0
+nomadnet==0.3.5
