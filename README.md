@@ -1,6 +1,8 @@
 # micron-blog
 
-Pelican Plug-In and Theme for publishing a site in Micron markup format for Nomad Network Nodes
+**work in progress - it's functional but not pretty yet - stay tuned**
+
+Pelican Plug-In and Theme for publishing a site in Micron markup format for [Nomad Network](https://github.com/markqvist/NomadNet/) Nodes
 
 ## Installation
 
