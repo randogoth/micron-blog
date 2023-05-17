@@ -208,13 +208,11 @@ class MarkdownToMicronReader(MarkdownReader):
 
         metadata = self._parse_metadata(meta)
         content = '\n'.join(lines)
-
         m2μr = MicronRenderer()
         m2μ = Markdown(renderer=m2μr)
         m2μ.inline.register('underlined', UNDERLINED, parse_underlined, before='emphasis')
         m2μ.renderer.register('underlined', render_underlined_mu)
         content = m2μ(content)
-        print(content)
         return content, metadata
 
 # === M I C R O N   W R I T E R ===
@@ -245,9 +243,8 @@ class MicronWriter(Writer):
             # set localsiteurl for context so that Contents can adjust links
             if localcontext['localsiteurl']:
                 context['localsiteurl'] = localcontext['localsiteurl']
-            output = template.render(localcontext)
+            output = template.render(localcontext).replace('.html', '.mu')
             path = sanitised_join(output_path, name)
-
             try:
                 os.makedirs(os.path.dirname(path))
             except Exception:

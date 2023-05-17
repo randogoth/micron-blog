@@ -2,14 +2,8 @@
 {% block content %}
 {% block content_title %}
 {% endblock %}
-
 {% for article in articles %}
-
-+[{{ article.locale_date }}]
->>>>`[`!{{ article.title }}`!`/{{ article.url }}]
->>>>{{ article.summary }}
-
--
++ [{{ article.locale_date }}] `!`_`[{{ article.title }}`:/{{ article.url }}]`_`!
 
 {% endfor %}
 
