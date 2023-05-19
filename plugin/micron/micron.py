@@ -63,6 +63,7 @@ def render_underlined_html(self, token, state) -> str:
 class MicronRenderer(MarkdownRenderer):
     """A renderer to format Micron text."""
     NAME = 'micron'
+    settings = {}
 
     def __call__(self, tokens, state: BlockState):
         out = self.render_tokens(tokens, state)
@@ -78,31 +79,30 @@ class MicronRenderer(MarkdownRenderer):
         return token['raw']
     
     def emphasis(self, token: Dict[str, Any], state: BlockState) -> str:
-        return '`*' + self.render_children(token, state) + '`*'
+        fpre, fpost = self.settings.get('MICRON_EMPHASIS_FORMAT', ['', ''])
+        return fpre + '`*' + self.render_children(token, state) + '`*' + fpost
 
     def strong(self, token: Dict[str, Any], state: BlockState) -> str:
-        return '`!' + self.render_children(token, state) + '`!'
+        fpre, fpost = self.settings.get('MICRON_STRONG_FORMAT', ['', ''])
+        return fpre + '`!' + self.render_children(token, state) + '`!' + fpost
     
     def link(self, token: Dict[str, Any], state: BlockState) -> str:
+        fpre, fpost = self.settings.get('MICRON_LINK_FORMAT', ['', ''])
         label = token.get('label')
         text = self.render_children(token, state)
-        out = '`[' + text + '`'
-        if label:
-            return out + '`[' + label + '`'
+        out = fpre
+        out += '`[' + text + '`'
         attrs = token['attrs']
         url = attrs['url']
-        if text == url:
-            return '`[' + text + '`'
-        elif 'mailto:' + text == url:
-            return '`[' + text + '`'
         out += url
-        return out + ']'
+        return out + ']' + fpost
     
     def image(self, token: Dict[str, Any], state: BlockState) -> str:
         return self.link(token, state)
 
     def codespan(self, token: Dict[str, Any], state: BlockState) -> str:
-        return '`=' + token['raw'] + '`='
+        fpre, fpost = self.settings.get('MICRON_CODE_FORMAT', ['', ''])
+        return fpre + '`=' + token['raw'] + '`=' + fpost
 
     def linebreak(self, token: Dict[str, Any], state: BlockState) -> str:
         return '  \n'
@@ -121,12 +121,14 @@ class MicronRenderer(MarkdownRenderer):
         return text + '\n\n'
 
     def heading(self, token: Dict[str, Any], state: BlockState) -> str:
+        fpre, fpost = self.settings.get('MICRON_HEADER_FORMAT', ['', ''])
         level = token['attrs']['level']
         if level > 3:
             level = 3
         marker = '>' * level
         text = self.render_children(token, state)
-        return marker + ' ' + text + '\n\n'
+        return fpre + marker + ' ' + text + fpost + '\n\n'
+    
     def thematic_break(self, token: Dict[str, Any], state: BlockState) -> str:
         return '-\n\n'
     
@@ -134,15 +136,17 @@ class MicronRenderer(MarkdownRenderer):
         return self.render_children(token, state) + '\n'
     
     def block_code(self, token: Dict[str, Any], state: BlockState) -> str:
+        fpre, fpost = self.settings.get('MICRON_CODE_FORMAT', ['', ''])
         code = token['raw']
         if code and code[-1] != '\n':
             code += '\n'
         marker = '`='
-        return marker + '\n' + code + marker + '\n\n'
+        return fpre + marker + '\n' + code + marker + fpost + '\n\n'
     
     def block_quote(self, token: Dict[str, Any], state: BlockState) -> str:
+        fpre, fpost = self.settings.get('MICRON_QUOTE_FORMAT', ['', ''])
         text = indent(self.render_children(token, state), '>>>>')
-        return text + '\n\n'
+        return fpre + text + fpost + '\n\n'
     
     def block_html(self, token: Dict[str, Any], state: BlockState) -> str:
         return ''
@@ -151,7 +155,8 @@ class MicronRenderer(MarkdownRenderer):
         return ''
     
     def list(self, token: Dict[str, Any], state: BlockState) -> str:
-        return render_list(self, token, state)
+        fpre, fpost = self.settings.get('MICRON_LIST_FORMAT', ['', ''])
+        return fpre + render_list(self, token, state) + fpost
 
 # === M A R K D O W N   T O   M I C R O N   R E A D E R ===
 

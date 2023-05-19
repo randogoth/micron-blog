@@ -63,3 +63,42 @@ $ cp -R output/* ~/.nomadnetwork/storage/pages
 ```
 
 Run your node and serve the pages....
+
+## Additional Formatting
+
+Since micron templates do not support styling like CSS and Markdown is a strict content-only markup language all the color styling needs to be done using micron tags in the template files themselves. 
+
+Micron-blog offers a few Settings that allow to set enclosing tags for some of the inline and block elements that are rendered by Pelican:
+
+```Python
+MICRON_EMPHASIS_FORMAT = []
+MICRON_STRONG_FORMAT = []
+MICRON_LINK_FORMAT = []
+MICRON_CODE_FORMAT = []
+MICRON_HEADER_FORMAT = []
+MICRON_QUOTE_FORMAT = []
+MICRON_LIST_FORMAT = []
+```
+
+Each of them taks a list of exactly two tag definitions, one for the left and one for the right enclosing tag. For example, if you want to define all rendered links to be blue and underlined and all emphasized text to be yellow you could define the following settings in `pelicanconfig.py`:
+
+```Python
+MICRON_LINK_FORMAT = ['`F00f`_', '`_`f']
+MICRON_EMPHASIS_FORMAT = ['`Fff0', '`f']
+```
+
+Now links created as:
+```Markdown
+[title](url)
+*emphasized text*
+```
+will be rendered as:
+```
+`F00f`_`[title`url]`_`f
+`Fff0`*emphasized text`*`f
+```
+
+If you want the same settings to be honoured by the templates, they need to be implemented respecively. The settings are accessible by the templates:
+```jinja
+{{ MICRON_LINK_FORMAT[0] }}`[{{ p.title }}`:/{{ p.url }}]{{ MICRON_LINK_FORMAT[1] }}
+```
