@@ -25,3 +25,5 @@ PLUGIN_PATHS = ["../plugin"]
 PLUGINS = ['micron']
 THEME = '../theme'
 MICRON_PATH = 'output/micron'
+STATIC_PATHS = ['../scripts/helloworld.mu']
+EXTRA_PATH_METADATA = {'../scripts/helloworld.mu': {'path': 'micron/helloworld.mu'},}

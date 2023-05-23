@@ -102,3 +102,24 @@ If you want the same settings to be honoured by the templates, they need to be i
 ```jinja
 {{ MICRON_LINK_FORMAT[0] }}`[{{ p.title }}`:/{{ p.url }}]{{ MICRON_LINK_FORMAT[1] }}
 ```
+
+## Dynamic Content
+
+If you want to place an executable script file in the output folder, use Pelican's `STATIC_PATHS`
+setting to mark it as a static file and the `EXTRA_PATH_METADATA` setting to copy it to
+the output folder.
+
+```python
+STATIC_PATHS = ['../scripts/helloworld.mu']
+EXTRA_PATH_METADATA = {'../scripts/helloworld.mu': {'path': 'micron/helloworld.mu'},}
+```
+
+A good way to link to such a dynamic content file is to add a dummy article or page with an
+empty `save_as` meta tag and a `url` tag pointing to the script's final location.
+```
+Title: Hello World
+Date: 2023-05-22
+save_as: 
+url: helloworld.mu
+```
+(see the `pelicanconf.py `and `script.md` files in the examples folder.)
