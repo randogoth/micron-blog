@@ -3,7 +3,7 @@
 >Authors on {{ SITENAME }}
 
 {%- for author, articles in authors|sort %}
-+ `[{{ author }}`:/{{ author.url }}] ({{ articles|count }})
++ `[{{ author }}`:/page/{{ author.url }}] ({{ articles|count }})
 
 {% endfor %}
 {% endblock %}

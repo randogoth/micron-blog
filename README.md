@@ -100,7 +100,7 @@ will be rendered as:
 
 If you want the same settings to be honoured by the templates, they need to be implemented respecively. The settings are accessible by the templates:
 ```jinja
-{{ MICRON_LINK_FORMAT[0] }}`[{{ p.title }}`:/{{ p.url }}]{{ MICRON_LINK_FORMAT[1] }}
+{{ MICRON_LINK_FORMAT[0] }}`[{{ p.title }}`:/page/{{ p.url }}]{{ MICRON_LINK_FORMAT[1] }}
 ```
 
 ## Dynamic Content

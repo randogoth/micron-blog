@@ -4,7 +4,7 @@
 
 {% for article in dates %}
 +[{{ article.locale_date }}]
->>>>`[`!{{ article.title }}`!`:/{{ article.url }}]
+>>>>`[`!{{ article.title }}`!`:/page/{{ article.url }}]
 >>>>{{ article.summary }}
 {% endfor %}
 {% endblock %}

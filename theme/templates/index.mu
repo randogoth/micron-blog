@@ -3,7 +3,7 @@
 {% block content_title %}
 {% endblock %}
 {% for article in articles %}
-+ [{{ article.locale_date }}] `!`_`[{{ article.title }}`:/{{ article.url }}]`_`!
++ [{{ article.locale_date }}] `!`_`[{{ article.title }}`:/page/{{ article.url }}]`_`!
 
 {% endfor %}
 
