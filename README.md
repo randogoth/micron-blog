@@ -1,8 +1,12 @@
 # micron-blog
 
-**work in progress - it's functional but not pretty yet - stay tuned**
-
 Pelican Plug-In and Theme for publishing a site in Micron markup format for [Nomad Network](https://github.com/markqvist/NomadNet/) Nodes
+
+## Example
+
+The *RandoNode* pages at `<ccfaae920f101f74afbae5ad779b0f4f>` are generated using this Plug-In.
+
+![screenshot](screenshot.png)
 
 ## Installation
 
