@@ -1,4 +1,4 @@
-Repository moved to [codeberg.org/randogoth/micron-blog.git](https://codeberg.org/randogoth/micron-blog.git)
+Repository moved to [code.randogoth.com/randogoth/micron-blog.git](https://code.randogoth.com/randogoth/micron-blog.git)
 
 # micron-blog
 
